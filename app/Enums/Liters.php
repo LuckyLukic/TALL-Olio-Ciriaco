@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum ItemType: string
+enum Liters: int
 {
 
-    case EXTRAVIRGENOIL = 'olio_extravergine';
-
+    case LITER = 1;
+    case LITER5 = 5;
 
     public static function values(): array
     {

@@ -1,10 +1,8 @@
 <?php
 
-use App\Enums\Liters;
-use App\Enums\ItemType;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
@@ -12,12 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('order_item', function (Blueprint $table) {
             $table->id();
-            $table->enum('item_type', ItemType::values());
-            $table->enum('liters', Liters::values());
-            $table->float('price');
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('item_id')->constrained('items');
+            $table->unsignedInteger('quantity');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('order_items');
     }
 };

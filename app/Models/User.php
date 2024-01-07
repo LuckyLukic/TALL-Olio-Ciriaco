@@ -3,10 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Item;
+use App\Models\Order;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class User extends Authenticatable
 {
@@ -43,4 +48,19 @@ class User extends Authenticatable
         'password' => 'hashed',
         'role' => Role::class,
     ];
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function items(): HasManyThrough
+    {
+        return $this->hasManyThrough(Item::class, Order::class);
+    }
 }
