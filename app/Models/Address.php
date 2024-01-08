@@ -11,6 +11,14 @@ class Address extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'address',
+        'country',
+        'city',
+        'province',
+        'postal_code',
+    ];
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);

@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->string('address');
             $table->string('city');
             $table->string('province');
-            $table->string('counrty')->default('italia');
+            $table->string('country')->default('Italia');
             $table->string('postal_code', 5);
             $table->timestamps();
         });
