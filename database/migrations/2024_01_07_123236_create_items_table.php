@@ -14,8 +14,11 @@ return new class extends Migration {
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->enum('item_type', ItemType::values());
             $table->enum('liters', Liters::values());
+            $table->string('image');
+            $table->longText('description');
             $table->float('price');
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->timestamps();

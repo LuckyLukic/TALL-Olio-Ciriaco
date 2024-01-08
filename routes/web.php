@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\CreateItem;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/item/create', CreateItem::class)->name('item.create');
