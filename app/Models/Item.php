@@ -12,6 +12,16 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'item_type',
+        'liters',
+        'image',
+        'description',
+        'price',
+        'quantity'
+    ];
+
     public function order(): BelongsToMany
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');

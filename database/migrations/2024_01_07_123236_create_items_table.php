@@ -19,8 +19,9 @@ return new class extends Migration {
             $table->enum('liters', Liters::values());
             $table->string('image');
             $table->longText('description');
-            $table->float('price');
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->decimal('price', 9, 2);
+            $table->unsignedTinyInteger('quantity')->nullable();
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('cascade');
             $table->timestamps();
         });
     }

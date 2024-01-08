@@ -5,7 +5,7 @@ namespace App\Enums;
 enum ItemType: string
 {
 
-    case EXTRAVIRGENOIL = 'olio_extravergine';
+    case EXTRAVIRGENOIL = 'olio extravergine';
 
 
     public static function values(): array
