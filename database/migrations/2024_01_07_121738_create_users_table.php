@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('fiscal_code', 16);
-            $table->string('phone_number')->unique();
+            $table->string('fiscal_code', 16)->nullable();
+            $table->string('phone')->unique();
             $table->enum('role', Role::values())->default(Role::USER);
             $table->foreignId('address_id')->constrained('addresses');
             $table->rememberToken();
