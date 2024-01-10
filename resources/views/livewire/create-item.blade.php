@@ -32,13 +32,22 @@
                  </select>
              </div>
 
-             <div class="sm:col-span-2">
-                 <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload
-                     Image</label>
-                 <input type="file" name="image" id="image" wire:model='image'
-                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                     placeholder="Max 2Mb">
-             </div>
+             @foreach ($images as $key => $value)
+                 <div class="sm:col-span-2">
+                     <label for="image{{ $key }}"
+                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Image</label>
+                     <div class="flex items-center space-x-4">
+                         <input type="file" name="image{{ $key }}" id="image{{ $key }}"
+                             wire:model="images.{{ $key }}"
+                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                             placeholder="Max 2Mb">
+                         <button wire:click.prevent="confirmImage" type="button"
+                             class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                             Confirm
+                         </button>
+                     </div>
+                 </div>
+             @endforeach
 
 
              <div class="w-full">

@@ -3,8 +3,10 @@
 namespace App\Models;
 
 
+use App\Models\Image;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -16,7 +18,6 @@ class Item extends Model
         'name',
         'item_type',
         'liters',
-        'image',
         'description',
         'price',
         'quantity'
@@ -25,6 +26,11 @@ class Item extends Model
     public function order(): BelongsToMany
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
     }
 
 

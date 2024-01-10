@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('name');
             $table->enum('item_type', ItemType::values());
             $table->enum('liters', Liters::values());
-            $table->string('image');
             $table->longText('description');
             $table->decimal('price', 9, 2);
             $table->unsignedTinyInteger('quantity')->nullable();
