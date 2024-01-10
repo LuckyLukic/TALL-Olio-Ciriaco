@@ -7,13 +7,15 @@ use App\Enums\Liters;
 use App\Models\Image;
 use App\Enums\ItemType;
 use Livewire\Component;
+use Illuminate\Http\UploadedFile;
 use Livewire\WithFileUploads;
+
+
 
 class CreateItem extends Component
 {
 
     use WithFileUploads;
-
     public $categories;
     public $liters;
 
@@ -63,9 +65,9 @@ class CreateItem extends Component
 
             ]);
 
-            if ($this->image) {
-                foreach ($this->images as $image) {
 
+            foreach ($this->images as $image) {
+                if ($image) {
                     $imageName = $image->store('images', 'public');
                     Image::create([
                         'url' => $imageName,
