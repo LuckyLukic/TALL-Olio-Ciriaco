@@ -11,16 +11,16 @@
         </div>
         <form wire:submit='createItem' class="grid grid-cols-6 gap-4 px-4 py-4 bg-white">
             <div class="col-span-2">
-                <select id="category" wire:model='category'
+                <select id="item" wire:model.live="selectedItemId"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option selected="">Select Item</option>
                     @foreach ($items as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div>
-                <input type="number" name="quantity" id="quantity" wire:model='quantity'
+                <input type="number" name="quantity" id="quantity"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     required="">
             </div>
@@ -30,7 +30,7 @@
                     required="">
             </div>
             <div>
-                <input type="number" name="total" id="total" wire:model='total'
+                <input type="number" name="total" id="total"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     readonly>
             </div>
@@ -39,9 +39,9 @@
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full ">Add</button>
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">Clear</button>
             </div>
-            <div class="col-span-6">
+            <div class="col-span-1 col-end-7">
                 <button type="submit"
-                    class="inline-flex items-center w-full px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-indigo-900 hover:bg-indigo-800">Save
+                    class=" items-center w-full px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-indigo-900 hover:bg-indigo-800">Save
                     Order</button>
             </div>
         </form>

@@ -27,6 +27,8 @@ class CreateItem extends Component
     public $description;
     public $quantity = 0;
 
+    public $stringa = "";
+
     public function confirmImage()
     {
         $this->images[] = null; // Add a new input field, is same as writing: array_push($this->images, null);
@@ -37,6 +39,11 @@ class CreateItem extends Component
         $this->categories = ItemType::values();
         $this->liters = Liters::values();
     }
+
+    // public function updatedSize($size)
+    // {
+    //     dd($size);
+    // }
 
     protected $rules = [
         'name' => 'required|string|max:255',
