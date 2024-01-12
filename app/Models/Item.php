@@ -25,7 +25,7 @@ class Item extends Model
 
     public function order(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
+        return $this->belongsToMany(Order::class, 'order_item')->withPivot('quantity');
     }
 
     public function images(): HasMany

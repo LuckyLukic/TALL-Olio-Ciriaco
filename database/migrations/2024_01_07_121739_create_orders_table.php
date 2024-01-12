@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('total_items');
+            $table->float('total_amount');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->float('total');
             $table->timestamps();
         });
     }
