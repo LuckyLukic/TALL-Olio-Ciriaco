@@ -11,18 +11,30 @@ class CreateOrder extends Component
     public $items;
     public $user;
 
-    public $selectedItemId;
-    public $price = 0;
+    public $orderItems = [[]];
 
-    public $quantity = 0;
-
-    public $total = 0;
-
-    public $orderItems = [null];
-
-    public function updatedQuantity($value)
+    public function updated($propertyName)
     {
-        $this->total = $this->price > 0 ? $value * $this->price : 0;
+        if (preg_match('/orderItems\.(\d+)\.(item_id|quantity)/', $propertyName, $matches)) {
+            $index = $matches[1];
+            $this->updateOrderItem($index);
+        }
+    }
+
+    private function updateOrderItem($index)
+    {
+
+        logger("Updating order item at index: $index");
+
+        $item = $this->orderItems[$index] ?? null;
+        if ($item && isset($item['item_id'])) {
+            $selectedItem = $this->items->find($item['item_id']);
+            if ($selectedItem) {
+                $this->orderItems[$index]['price'] = $selectedItem->price;
+                $quantity = $this->orderItems[$index]['quantity'] ?? 0;
+                $this->orderItems[$index]['total'] = $selectedItem->price * $quantity;
+            }
+        }
     }
 
 
@@ -31,33 +43,21 @@ class CreateOrder extends Component
         $this->items = Item::all();
     }
 
-    public function updatedSelectedItemId($itemId)
-    {
-        $item = $this->items->find($itemId);
-        $this->price = $item ? $item->price : 0;
-        $this->total = $this->price > 0 ? $this->quantity * $this->price : 0;
-    }
-
     protected $rules = [
-        'selectedItemId' => 'required',
-        'quantity' => 'required|numeric',
-        'price' => 'required|numeric',
+        'orderItems.*.item_id' => 'required|exists:items,id',
+        'orderItems.*.quantity' => 'required|numeric|min:1',
+        'orderItems.*.price' => 'required|numeric|min:0.1',
+        'orderItems.*.total' => 'required|numeric|min:0.1'
     ];
 
     public function addOrderItem()
     {
         $this->validate();
 
-        $this->orderItems[] = [
-            'item_id' => $this->selectedItemId,
-            'quantity' => $this->quantity,
 
-        ];
-        $this->orderItems[] = null;
+        $this->orderItems[] = [];
     }
 
-    //     $this->reset(['selectedItemId', 'quantity', 'price']);
-    // }
 
     public function clearRow()
     {

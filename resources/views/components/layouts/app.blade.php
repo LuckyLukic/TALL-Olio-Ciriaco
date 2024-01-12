@@ -7,12 +7,12 @@
 
     <title>{{ $title ?? 'Olio-Ciriaco' }}</title>
     @vite('resources/css/app.css', 'resources/js/app.js')
-    @livewireStyles
+
 </head>
 
 <body>
     {{ $slot }}
-    @livewireScripts
+
     {{-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> --}}
 </body>
 

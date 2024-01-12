@@ -12,7 +12,7 @@
         <form wire:submit='createItem' class="grid grid-cols-6 gap-4 px-4 py-4 bg-white">
             @foreach ($orderItems as $key => $value)
                 <div class="col-span-2">
-                    <select id="item" wire:model.live="selectedItemId"
+                    <select id="item{{ $key }}" wire:model.live='orderItems.{{ $key }}.item_id'
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="">Select Item</option>
                         @foreach ($items as $item)
@@ -21,17 +21,20 @@
                     </select>
                 </div>
                 <div>
-                    <input type="number" name="quantity" id="quantity" wire:model.live='quantity'
+                    <input type="number" name="quantity{{ $key }}"
+                        wire:model.live="orderItems.{{ $key }}.quantity"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         required="">
                 </div>
                 <div>
-                    <input type="number" name="price" id="price" wire:model='price'
+                    <input type="number" name="price{{ $key }}"
+                        wire:model="orderItems.{{ $key }}.price"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         required="">
                 </div>
                 <div>
-                    <input type="number" name="total" id="total" wire:model.live='total'
+                    <input type="number" name="total{{ $key }}"
+                        wire:model="orderItems.{{ $key }}.total"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         readonly>
                 </div>
@@ -49,4 +52,6 @@
             </div>
         </form>
     </div>
+
+</div>
 </div>
