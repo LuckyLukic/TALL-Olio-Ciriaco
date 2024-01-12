@@ -41,12 +41,14 @@
                              wire:model="images.{{ $key }}"
                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                              placeholder="Max 2Mb">
-                         <div x-data="{ show: @entangle('images') }"">
-                             <button wire:click.prevent="confirmImage" type="button"
-                                 class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                 Confirm
-                             </button>
-                         </div>
+
+                         <button wire:click.prevent="confirmImage" type="button"
+                             class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                             @if (empty($images[$key])) disabled @endif>
+                             Confirm
+
+                         </button>
+
                      </div>
                  </div>
              @endforeach

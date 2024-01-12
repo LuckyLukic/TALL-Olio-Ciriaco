@@ -14,6 +14,16 @@ class CreateOrder extends Component
     public $selectedItemId;
     public $price = 0;
 
+    public $quantity = 0;
+
+    public $total = 0;
+
+    public $orderItems = [null];
+
+    public function updatedQuantity($value)
+    {
+        $this->total = $this->price > 0 ? $value * $this->price : 0;
+    }
 
 
     public function mount(User $user)
@@ -25,7 +35,39 @@ class CreateOrder extends Component
     {
         $item = $this->items->find($itemId);
         $this->price = $item ? $item->price : 0;
+        $this->total = $this->price > 0 ? $this->quantity * $this->price : 0;
+    }
 
+    protected $rules = [
+        'selectedItemId' => 'required',
+        'quantity' => 'required|numeric',
+        'price' => 'required|numeric',
+    ];
+
+    public function addOrderItem()
+    {
+        $this->validate();
+
+        $this->orderItems[] = [
+            'item_id' => $this->selectedItemId,
+            'quantity' => $this->quantity,
+
+        ];
+        $this->orderItems[] = null;
+    }
+
+    //     $this->reset(['selectedItemId', 'quantity', 'price']);
+    // }
+
+    public function clearRow()
+    {
+        $this->reset(['selectedItemId', 'quantity', 'price']);
+    }
+
+    public function removeOrderItem($index)
+    {
+        unset($this->orderItems[$index]);
+        $this->orderItems = array_values($this->orderItems); // Reindex array
     }
 
 

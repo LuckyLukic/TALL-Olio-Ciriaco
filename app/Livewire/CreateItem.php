@@ -32,6 +32,7 @@ class CreateItem extends Component
     public function confirmImage()
     {
         $this->images[] = null; // Add a new input field, is same as writing: array_push($this->images, null);
+
     }
 
     public function mount()
